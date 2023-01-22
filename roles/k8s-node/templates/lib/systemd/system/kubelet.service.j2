@@ -13,7 +13,6 @@ ExecStart=/usr/local/bin/kubelet \
   --image-pull-progress-deadline=2m \
   --kubeconfig=/etc/kubernetes/kubelet/{{ inventory_hostname }}.kubeconfig \
   --node-ip={{ lookup('community.general.dig', inventory_hostname) }} \
-  --hostname-override={{ inventory_hostname }} \
   --register-node=true \
   --v=2
 Restart=on-failure

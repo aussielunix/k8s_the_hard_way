@@ -97,12 +97,12 @@
       contexts:
         - context:
             cluster: {{ cluster_name }}
-            user: system:node:{{ item }}
+            user: system:node:{{ hostvars[item].inventory_hostname_short }}
           name: default
       current-context: default
       preferences: {}
       users:
-        - name: system:node:{{ item }}
+        - name: system:node:{{ hostvars[item].inventory_hostname_short }}
           user:
             client-certificate-data: {{ lookup('file', '{{ k8s_pki_dir }}/{{ item }}.crt') | b64encode }}
             client-key-data: {{ lookup('file', '{{ k8s_pki_dir }}/{{ item }}.key') | b64encode }}
