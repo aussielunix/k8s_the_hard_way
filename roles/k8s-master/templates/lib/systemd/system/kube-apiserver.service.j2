@@ -7,7 +7,7 @@ Documentation=https://kubernetes.io/docs
 [Service]
 Type=notify
 ExecStart=/usr/local/bin/kube-apiserver \
-  --advertise-address={{ ansible_host }} \
+  --advertise-address={{ lookup('community.general.dig', inventory_hostname) }} \
   --allow-privileged=true \
   --anonymous-auth=false \
   --apiserver-count=3 \
@@ -24,7 +24,7 @@ ExecStart=/usr/local/bin/kube-apiserver \
   --etcd-cafile=/etc/kubernetes/etcd-server-ca.crt \
   --etcd-certfile=/etc/kubernetes/kube-apiserver-etcd-client.crt \
   --etcd-keyfile=/etc/kubernetes/kube-apiserver-etcd-client.key \
-  --etcd-servers=https://{{ hostvars['k8s-etcd-1']['ansible_host'] }}:2379,https://{{ hostvars['k8s-etcd-2']['ansible_host'] }}:2379,https://{{ hostvars['k8s-etcd-3']['ansible_host'] }}:2379 \
+  --etcd-servers=https://{{ groups['etcd'].0 }}:2379,https://{{ groups['etcd'].1 }}:2379,https://{{ groups['etcd'].2 }}:2379 \
   --event-ttl=1h \
   --encryption-provider-config=/etc/kubernetes/encryption-config.yaml \
   --kubelet-certificate-authority=/etc/kubernetes/k8s-ca.crt \
@@ -33,7 +33,7 @@ ExecStart=/usr/local/bin/kube-apiserver \
   --runtime-config=api/all=true \
   --service-account-key-file=/etc/kubernetes/service-account.crt \
   --service-account-signing-key-file=/etc/kubernetes/service-account.key \
-  --service-account-issuer=https://{{ hostvars['loadbalancer']['ansible_host'] }}:6443 \
+  --service-account-issuer=https://{{ lookup('community.general.dig', groups['loadbalancer'].0) }}:6443 \
   --service-cluster-ip-range={{ cluster_ip_range }} \
   --service-node-port-range=30000-32767 \
   --tls-cert-file=/etc/kubernetes/{{ inventory_hostname }}-apiserver.crt \

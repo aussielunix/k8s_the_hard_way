@@ -18,12 +18,12 @@ ExecStart=/usr/local/bin/etcd \
   --peer-trusted-ca-file=/etc/etcd/etcd-peer-ca.crt \
   --peer-client-cert-auth \
   --client-cert-auth \
-  --initial-advertise-peer-urls https://{{ hostvars[inventory_hostname]['ansible_host'] }}:2380 \
-  --listen-peer-urls https://{{ hostvars[inventory_hostname]['ansible_host'] }}:2380 \
-  --listen-client-urls https://{{ hostvars[inventory_hostname]['ansible_host'] }}:2379,http://127.0.0.1:2379 \
-  --advertise-client-urls https://{{ hostvars[inventory_hostname]['ansible_host'] }}:2379 \
+  --initial-advertise-peer-urls https://{{ hostvars[inventory_hostname]['ansible_' + etcd_interface].ipv4.address }}:2380 \
+  --listen-peer-urls https://{{ hostvars[inventory_hostname]['ansible_' + etcd_interface].ipv4.address }}:2380 \
+  --listen-client-urls https://{{ hostvars[inventory_hostname]['ansible_' + etcd_interface].ipv4.address }}:2379,http://127.0.0.1:2379 \
+  --advertise-client-urls https://{{ hostvars[inventory_hostname]['ansible_' + etcd_interface].ipv4.address }}:2379 \
   --initial-cluster-token etcd-cluster \
-  --initial-cluster k8s-etcd-1=https://{{ hostvars['k8s-etcd-1']['ansible_host'] }}:2380,k8s-etcd-2=https://{{ hostvars['k8s-etcd-2']['ansible_host'] }}:2380,k8s-etcd-3=https://{{ hostvars['k8s-etcd-3']['ansible_host'] }}:2380 \
+  --initial-cluster {{ groups['etcd'].0 }}=https://{{ _etcd_ips.0 }}:2380,{{ groups['etcd'].1 }}=https://{{ _etcd_ips.1 }}:2380,{{ groups['etcd'].2 }}=https://{{ _etcd_ips.2 }}:2380 \
   --initial-cluster-state new \
   --data-dir=/var/lib/etcd
 Restart=on-failure

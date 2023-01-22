@@ -34,10 +34,7 @@
 - name: Generate etcd servers private keys
   openssl_privatekey:
     path: '{{ etcd_pki_dir }}/{{ item }}-server.key'
-  loop:
-    - k8s-etcd-1
-    - k8s-etcd-2
-    - k8s-etcd-3
+  loop: "{{ groups['etcd'] }}"
 
 - name: Generate etcd servers csrs
   openssl_csr:
@@ -54,13 +51,13 @@
     common_name: "{{ item }}-server"
     subject_alt_name:
       - DNS:localhost
-      - DNS:{{ item }}
+      - DNS:{{ hostvars[item].inventory_hostname_short }}
+      - DNS:{{ hostvars[item].inventory_hostname }}
       - IP:127.0.0.1
-      - IP:{{ hostvars[item]['ansible_host'] }}
-  loop:
-    - k8s-etcd-1
-    - k8s-etcd-2
-    - k8s-etcd-3
+      - IP:{{ lookup('community.general.dig', item) }}
+  loop: "{{ groups['etcd'] }}"
+  vars:
+    _etcd_interface: "ansible_{{ etcd_interface }}"
 
 - name: Generate etcd servers certificates
   openssl_certificate:
@@ -69,18 +66,12 @@
     ownca_path: '{{ etcd_pki_dir }}/etcd-server-ca.crt'
     ownca_privatekey_path: '{{ etcd_pki_dir }}/etcd-server-ca.key'
     provider: ownca
-  loop:
-    - k8s-etcd-1
-    - k8s-etcd-2
-    - k8s-etcd-3
+  loop: "{{ groups['etcd'] }}"
 
 - name: Generate etcd peers private keys
   openssl_privatekey:
     path: '{{ etcd_pki_dir }}/{{ item }}-peer.key'
-  loop:
-    - k8s-etcd-1
-    - k8s-etcd-2
-    - k8s-etcd-3
+  loop: "{{ groups['etcd'] }}"
 
 - name: Generate etcd peers csrs
   openssl_csr:
@@ -97,13 +88,11 @@
     common_name: "{{ item }}-peer"
     subject_alt_name:
       - DNS:localhost
-      - DNS:{{ item }}
+      - DNS:{{ hostvars[item].inventory_hostname_short }}
+      - DNS:{{ hostvars[item].inventory_hostname }}
       - IP:127.0.0.1
-      - IP:{{ hostvars[item]['ansible_host'] }}
-  loop:
-    - k8s-etcd-1
-    - k8s-etcd-2
-    - k8s-etcd-3
+      - IP:{{ lookup('community.general.dig', item) }}
+  loop: "{{ groups['etcd'] }}"
 
 - name: Generate etcd peers certificate
   openssl_certificate:
@@ -112,7 +101,4 @@
     ownca_path: '{{ etcd_pki_dir }}/etcd-peer-ca.crt'
     ownca_privatekey_path: '{{ etcd_pki_dir }}/etcd-peer-ca.key'
     provider: ownca
-  loop:
-    - k8s-etcd-1
-    - k8s-etcd-2
-    - k8s-etcd-3
+  loop: "{{ groups['etcd'] }}"

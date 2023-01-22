@@ -1,7 +1,6 @@
 ---
 - name: Deploy k8s nodes
   hosts: node
-  remote_user: vagrant
   become: yes
   roles:
     - k8s-node

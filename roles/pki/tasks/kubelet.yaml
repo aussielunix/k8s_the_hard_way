@@ -19,9 +19,10 @@
     extended_key_usage_critical: true
     organization_name: 'system:nodes'
     subject_alt_name:
-      - DNS:{{ item }}
-      - IP:{{ hostvars[item]['ansible_host'] }}
+      - DNS:localhost
+      - DNS:{{ hostvars[item].inventory_hostname }}
       - IP:127.0.0.1
+      - IP:{{ lookup('community.general.dig', item) }}
   loop: "{{ groups['node'] }}"
 
 - name: Generate kubelet servers certificates
