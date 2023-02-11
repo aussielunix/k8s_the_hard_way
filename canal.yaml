@@ -1,6 +1,0 @@
----
-- name: Deploy Canal plugin
-  hosts: localhost
-  connection: local
-  roles:
-    - canal
