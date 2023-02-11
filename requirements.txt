@@ -1,0 +1,5 @@
+ansible-core
+ansible-lint
+yamllint
+dnspython
+kubernetes
