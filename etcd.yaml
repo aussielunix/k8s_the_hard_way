@@ -1,5 +1,5 @@
 ---
-- name: Deoy Etcd cluster
+- name: Deploy Etcd cluster
   hosts: etcd
   become: yes
   roles:
