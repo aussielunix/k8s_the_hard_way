@@ -1,6 +1,6 @@
 ---
 - name: Deploy k8s nodes
-  hosts: node
+  hosts: master,node
   become: yes
   roles:
     - k8s-node
