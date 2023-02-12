@@ -1,6 +1,13 @@
 ---
 
 encryption_key: ronBedifGheutpymvitfiarHecepHorp
+cluster_name: k8s-the-hard-way
+
 k8s_pki_dir: "artifacts/pki"
 etcd_pki_dir: "artifacts/pki/etcd"
 bin_dir: "artifacts/binaries"
+kubeconfig_dir: "artifacts/kubeconfig"
+
+cluster_ip_range: 10.32.0.0/24
+pod_cidr: 10.200.0.0/16
+

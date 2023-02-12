@@ -1,11 +1,2 @@
 ---
 
-cluster_name: k8s-the-hard-way
-etcd_interface: ens3
-
-cluster_ip_range: 10.32.0.0/24
-pod_cidr: 10.200.0.0/16
-cluster_dns_ip: 10.32.0.10
-
-kubeconfig_dir: '{{ playbook_dir }}/kubeconfig'
-

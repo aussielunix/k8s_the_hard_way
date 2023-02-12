@@ -1,5 +1,7 @@
 ---
 
-k8s_pki_dir: "artifacts/pki"
-user_accounts_pki_dir: "artifacts/pki/user-accounts"
+cluster_name: k8s-the-hard-way
 
+k8s_pki_dir: artifacts/pki
+user_accounts_pki_dir: artifacts/pki/user-accounts
+kubeconfig_dir: artifacts/kubeconfig

@@ -1,4 +1,8 @@
 ---
 
-k8s_pki_dir: "artifacts/pki"
-bin_dir: "artifacts/binaries"
+pod_cidr: 10.200.0.0/16
+cluster_dns_ip: 10.32.0.10
+
+k8s_pki_dir: artifacts/pki
+bin_dir: artifacts/binaries
+kubeconfig_dir: artifacts/kubeconfig
