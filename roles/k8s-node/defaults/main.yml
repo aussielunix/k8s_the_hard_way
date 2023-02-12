@@ -1,3 +1,4 @@
 ---
 
 k8s_pki_dir: "artifacts/pki"
+bin_dir: "artifacts/binaries"

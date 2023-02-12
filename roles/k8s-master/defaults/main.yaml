@@ -3,4 +3,4 @@
 encryption_key: ronBedifGheutpymvitfiarHecepHorp
 k8s_pki_dir: "artifacts/pki"
 etcd_pki_dir: "artifacts/pki/etcd"
-
+bin_dir: "artifacts/binaries"
