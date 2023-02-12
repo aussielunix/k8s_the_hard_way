@@ -1,2 +1,4 @@
 ---
+
 etcd_version: v3.5.2
+etcd_pki_dir: "artifacts/pki/etcd"

@@ -1,0 +1,7 @@
+---
+
+k8s_pki_dir: "artifacts/pki"
+etcd_pki_dir: "artifacts/pki/etcd"
+user_accounts_pki_dir: "artifacts/pki/user-accounts"
+
+APISERVER_SERVICE_IP: 10.32.0.1

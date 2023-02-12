@@ -1,0 +1,5 @@
+---
+
+k8s_pki_dir: "artifacts/pki"
+user_accounts_pki_dir: "artifacts/pki/user-accounts"
+
