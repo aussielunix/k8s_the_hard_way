@@ -1,6 +1,0 @@
----
-- name: Deploy coredns
-  hosts: localhost
-  connection: local
-  roles:
-    - coredns
