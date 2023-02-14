@@ -10,9 +10,6 @@ k8s-master-3.d.hl.valueline.io
 k8s-master-1.d.hl.valueline.io
 k8s-master-2.d.hl.valueline.io
 k8s-master-3.d.hl.valueline.io
-#k8s-etcd-1.d.hl.valueline.io
-#k8s-etcd-2.d.hl.valueline.io
-#k8s-etcd-3.d.hl.valueline.io
 
 [node]
 k8s-node-1.d.hl.valueline.io
