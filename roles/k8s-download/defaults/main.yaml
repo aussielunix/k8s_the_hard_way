@@ -1,4 +1,4 @@
 ---
 
-k8s_version: v1.23.5
+k8s_version: v1.26.0
 bin_dir: "artifacts/binaries"

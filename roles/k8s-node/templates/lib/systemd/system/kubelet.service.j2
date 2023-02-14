@@ -6,11 +6,8 @@ Documentation=https://kubernetes.io/docs
 
 [Service]
 ExecStart=/usr/local/bin/kubelet \
-  --container-runtime=remote \
   --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock \
   --config=/etc/kubernetes/kubelet/kubelet-config.yaml \
-  --network-plugin=cni \
-  --image-pull-progress-deadline=2m \
   --kubeconfig=/etc/kubernetes/kubelet/{{ inventory_hostname }}.kubeconfig \
   --node-ip={{ lookup('community.general.dig', inventory_hostname) }} \
   --register-node=true \
