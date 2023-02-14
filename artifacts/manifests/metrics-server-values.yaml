@@ -1,0 +1,6 @@
+---
+
+# values for metrics-server
+# See https://artifacthub.io/packages/helm/metrics-server/metrics-server?modal=values
+
+replicas: 2
