@@ -1,5 +1,4 @@
 *swp
-.vagrant
-/pki
-/kubeconfig
-/bin
+
+artifacts/**/
+!artifacts/manifests/
