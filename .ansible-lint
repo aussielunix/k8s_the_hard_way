@@ -1,0 +1,11 @@
+---
+# https://ansible-lint.readthedocs.io/en/latest/configuring/
+
+profile: production
+use_default_rules: true
+
+exclude_paths:
+  - .gitlab-ci.yml
+  - tests
+  - molecule
+  - export
