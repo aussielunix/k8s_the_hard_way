@@ -1,0 +1,16 @@
+[loadbalancer]
+loadbalancer.d.hl.valueline.io
+
+[master]
+k8s-master-1.d.hl.valueline.io
+k8s-master-2.d.hl.valueline.io
+k8s-master-3.d.hl.valueline.io
+
+[etcd]
+k8s-master-1.d.hl.valueline.io
+k8s-master-2.d.hl.valueline.io
+k8s-master-3.d.hl.valueline.io
+
+[node]
+k8s-node-1.d.hl.valueline.io
+k8s-node-2.d.hl.valueline.io

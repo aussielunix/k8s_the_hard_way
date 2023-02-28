@@ -1,0 +1,20 @@
+---
+
+# pwgen 32 1 -cnys
+encryption_key: qQ&.T+.OkJOUnbYxN3(eg9nAegI`u5F<
+cluster_name: k8s-the-hard-way
+
+# original
+# :TODO: move to sane role defaults
+cluster_ip_range: 10.32.0.0/24
+pod_cidr: 10.200.0.0/16
+cluster_dns_ip: 10.32.0.10
+
+APISERVER_SERVICE_IP: 10.32.0.1
+
+bin_dir: '{{ playbook_dir }}/artifacts/bin'
+pki_dir: '{{ playbook_dir }}/artifacts/pki'
+etcd_pki_dir: '{{ playbook_dir }}/artifacts/pki/etcd'
+k8s_pki_dir: '{{ playbook_dir }}/artifacts/pki/k8s'
+user_accounts_pki_dir: '{{ playbook_dir }}/artifacts/pki/user-accounts'
+kubeconfig_dir: '{{ playbook_dir }}/artifacts/kubeconfig'

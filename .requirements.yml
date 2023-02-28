@@ -1,0 +1,10 @@
+---
+
+collections:
+  - name: community.general
+  - name: community.crypto
+  - name: ansible.posix
+  - name: kubernetes.core
+
+roles: []
+
