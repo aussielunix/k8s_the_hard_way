@@ -1,6 +1,0 @@
----
-- name: Deploy Canal
-  kubernetes.core.k8s:
-    definition: "{{ lookup('template', 'canal.yaml') }}"
-    kubeconfig: "{{ kubeconfig_dir }}/admin.kubeconfig"
-    apply: true
