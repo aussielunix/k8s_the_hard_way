@@ -1,7 +1,7 @@
 ---
 
 - name: Deploy k8s nodes
-  hosts: node
+  hosts: master,node
   become: true
   roles:
     - k8s-node

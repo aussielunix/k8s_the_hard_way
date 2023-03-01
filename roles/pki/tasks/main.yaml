@@ -49,9 +49,11 @@
   tags:
     - node
     - kubelet
+    - master
 
 - name: kube-proxy
   import_tasks: kube-proxy.yaml
   tags:
     - node
     - kube-proxy
+    - master

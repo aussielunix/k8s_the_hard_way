@@ -84,7 +84,7 @@
   tags:
     - admin
 
-- name: Generate kuebconfig for kubelets
+- name: Generate kubeconfig for kubelets
   copy:
     content: |
       apiVersion: v1
@@ -107,10 +107,11 @@
             client-certificate-data: {{ lookup('file', '{{ k8s_pki_dir }}/{{ item }}.crt') | b64encode }}
             client-key-data: {{ lookup('file', '{{ k8s_pki_dir }}/{{ item }}.key') | b64encode }}
     dest: "{{ kubeconfig_dir }}/{{ item }}.kubeconfig"
-  loop: "{{ groups['node'] }}"
+  loop: "{{ groups['node'] | union(groups['master']) }}"
   tags:
     - node
     - kubelet
+    - master
 
 - name: Generate kubeconfig for kube-proxy
   copy:
