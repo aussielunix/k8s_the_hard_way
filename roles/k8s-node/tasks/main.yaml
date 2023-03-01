@@ -1,4 +1,5 @@
 ---
+
 - name: Copy k8s node binaries
   copy:
     src: "{{ item }}"
@@ -56,7 +57,7 @@
     group: root
     mode: 0644
 
-- name: Copy certificates and kubeconfig files to node 1
+- name: Copy certificates and kubeconfig files to worker - {{ inventory_hostname }}
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -64,33 +65,14 @@
     group: root
     mode: 0644
   loop:
-    - src: "{{ k8s_pki_dir }}/k8s-node-1.crt"
+    - src: "{{ k8s_pki_dir }}/{{ inventory_hostname }}.crt"
       dest: "/etc/kubernetes/kubelet/"
-    - src: "{{ k8s_pki_dir }}/k8s-node-1.key"
+    - src: "{{ k8s_pki_dir }}/{{ inventory_hostname }}.key"
       dest: "/etc/kubernetes/kubelet/"
-    - src: "{{ kubeconfig_dir }}/k8s-node-1.kubeconfig"
-      dest: "/etc/kubernetes/kubelet/"
-    - src: "{{ kubeconfig_dir }}/kube-proxy.kubeconfig"
-      dest: "/etc/kubernetes/kube-proxy/"
-  when: inventory_hostname == 'k8s-node-1'
-
-- name: Copy certificates and kubeconfig files to node 2
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: root
-    group: root
-    mode: 0644
-  loop:
-    - src: "{{ k8s_pki_dir }}/k8s-node-2.crt"
-      dest: "/etc/kubernetes/kubelet/"
-    - src: "{{ k8s_pki_dir }}/k8s-node-2.key"
-      dest: "/etc/kubernetes/kubelet/"
-    - src: "{{ kubeconfig_dir }}/k8s-node-2.kubeconfig"
+    - src: "{{ kubeconfig_dir }}/{{ inventory_hostname }}.kubeconfig"
       dest: "/etc/kubernetes/kubelet/"
     - src: "{{ kubeconfig_dir }}/kube-proxy.kubeconfig"
       dest: "/etc/kubernetes/kube-proxy/"
-  when: inventory_hostname == 'k8s-node-2'
 
 - name: Copy config file for kubelet
   template:

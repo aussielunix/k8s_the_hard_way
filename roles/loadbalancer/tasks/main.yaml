@@ -1,4 +1,5 @@
 ---
+
 - name: Install nginx
   apt:
     name: nginx
@@ -12,13 +13,13 @@
       stream {
           upstream apiserver {
           {% for host in groups['master'] %}
-            server {{ hostvars[host]['ansible_host'] }}:6443;
+            server {{ lookup('community.general.dig', host) }}:6443;
           {% endfor %}
           }
 
           upstream etcd {
           {% for host in groups['etcd'] %}
-            server {{ hostvars[host]['ansible_host'] }}:2379;
+            server {{ lookup('community.general.dig', host) }}:2379;
           {% endfor %}
           }
 

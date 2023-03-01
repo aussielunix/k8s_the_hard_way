@@ -1,11 +1,9 @@
 ---
+
 - name: Generate apiservers private keys
   openssl_privatekey:
     path: "{{ k8s_pki_dir }}/{{ item }}-apiserver.key"
-  loop:
-    - k8s-master-1
-    - k8s-master-2
-    - k8s-master-3
+  loop: "{{ groups['master'] }}"
 
 - name: Generate apiserver csrs
   openssl_csr:
@@ -28,13 +26,10 @@
       - DNS:kubernetes.default.svc.cluster,
       - DNS:kubernetes.default.svc.cluster.local
       - IP:127.0.0.1
-      - IP:{{ hostvars[item]['ansible_host'] }}
+      - IP:{{ lookup('community.general.dig', item) }}
       - IP:{{ APISERVER_SERVICE_IP }}
-      - IP:{{ hostvars['loadbalancer']['ansible_host'] }}
-  loop:
-    - k8s-master-1
-    - k8s-master-2
-    - k8s-master-3
+      - IP:{{ lookup('community.general.dig', groups['loadbalancer'].0) }}
+  loop: "{{ groups['master'] }}"
 
 - name: Generate apiserver certificates
   openssl_certificate:
@@ -43,10 +38,7 @@
     ownca_path: "{{ k8s_pki_dir }}/k8s-ca.crt"
     ownca_privatekey_path: "{{ k8s_pki_dir }}/k8s-ca.key"
     provider: ownca
-  loop:
-    - k8s-master-1
-    - k8s-master-2
-    - k8s-master-3
+  loop: "{{ groups['master'] }}"
 
 - name: Generate apiserver kubelet client private key
   openssl_privatekey:
